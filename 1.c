@@ -15,20 +15,6 @@ typedef struct deck {
     struct deck *next_card;
 } deck;
 
-card create_card(char suit, char num) {
-    card a;
-    a.suit = suit;
-    a.num = num;
-
-    return a;
-}
-
-// int rand_deck_list(card deck_list) {
-    
-//     card random_deck_list[51];
-
-// }
-
 void push(deck **head, card card_to_add) {
     deck *tmp = (deck*) malloc(sizeof(deck));
     tmp->card_in_deck = card_to_add;
@@ -48,7 +34,7 @@ void fromArray(deck **head, card *arr, size_t size) {
 
 void printLinkedList(const deck *head) {
     while (head) {
-        printf("%c %c\n", head->card_in_deck, head->card_in_deck.num);
+        printf("%c%c ", head->card_in_deck, head->card_in_deck.num);
         head = head->next_card;
     }
     printf("\n");
@@ -96,10 +82,10 @@ int main(void) {
     card k9 = {'k', '9'};
     card b9 = {'b', '9'};
 
-    card c10 = {'c', '10'};
-    card p10 = {'p', '10'};
-    card k10 = {'k', '10'};
-    card b10 = {'b', '10'};
+    card c10 = {'c', 'T'};
+    card p10 = {'p', 'T'};
+    card k10 = {'k', 'T'};
+    card b10 = {'b', 'T'};
 
     card cV = {'c', 'v'};
     card pV = {'p', 'v'};
@@ -121,14 +107,17 @@ int main(void) {
     card kT = {'k', 't'};
     card bT = {'b', 't'};
 
-
+    char rank[9];
+    char suit[4];
     card deck_list[52] = {c2, p2, k2, b2, c3, p3, k3, b3, c4, p4, k4, b4, c5, p5, k5, b5, c6, p6, k6, b6, c7, p7, k7, b7, c8, p8, k8, b8, c9, p9, k9, b9, c10, p10, k10, b10, cV, pV, kV, bV, cD, pD, kD, bD, cK, pK, kK, bK, cT, pT, kT, bT};
-    // for (int i = 0; i <= 51; i++) {
-    //     printf("%c %c\n", deck_list[i].num, deck_list[i].suit); 
-    // }   
     deck* head = NULL;
-    int mf = time(0);
-    printf("%d", mf);
+    srand(time(0));
+        for (unsigned i = 0; i < 52; ++i){
+        unsigned j = rand() % ((52 - i) + i);
+        card t = deck_list[j];
+        deck_list[j] = deck_list[i];
+        deck_list[i] = t;
+    }
     fromArray(&head, deck_list, 52);
     printLinkedList(head);
     //printf("%c", (int)98);
