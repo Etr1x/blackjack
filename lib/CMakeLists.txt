@@ -1,0 +1,5 @@
+project(blackjack)
+set(SOURCES stack.c)
+set(HEADERS stack.h)
+add_library(lib ${SOURCES} ${HEADERS})
+target_include_directories(lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
